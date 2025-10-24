@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Furniture AR — Auto Camera</title>
+
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <style>
+    body { font-family: system-ui, Arial; margin:0; display:flex; flex-direction:column; height:100vh; }
+    header { padding:12px; background:#f2f2f2; border-bottom:1px solid #e6e6e6; }
+    main { display:flex; flex:1; gap:12px; padding:12px; }
+    #viewer { flex:1; min-height:60vh; background:#111; border-radius:8px; overflow:hidden; }
+    .gallery { width:220px; display:flex; flex-direction:column; gap:8px; }
+    .thumb { cursor:pointer; padding:12px; border:1px solid #ccc; border-radius:8px; text-align:center; background:#fff; transition:background 0.2s; font-size:15px; font-weight:500; }
+    .thumb:hover { background:#f0f0f0; }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>Furniture AR — Real World Demo</strong>
+    <div style="font-size:13px; color:#666;">Tap a furniture → camera opens → place it in your room</div>
+  </header>
+
+  <main>
+    <div id="viewer">
+      <!-- Only ONE model-viewer -->
+      <model-viewer id="mv"
+        src="thumbs/sofa1.glb"
+        alt="Furniture"
+        camera-controls
+        ar
+        ar-modes="webxr scene-viewer quick-look"
+        ar-placement="floor"
+        shadow-intensity="1"
+        style="width:100%; height:100%;">
+      </model-viewer>
+    </div>
+
+    <aside class="gallery">
+      <div class="thumb" data-model="thumbs/sofa1.glb" onclick="openAR(this)">Sofa 1</div>
+      <div class="thumb" data-model="thumbs/sofa2.glb" onclick="openAR(this)">Sofa 2</div>
+      <div class="thumb" data-model="thumbs/cupboard1.glb" onclick="openAR(this)">Cupboard 1</div>
+      <div class="thumb" data-model="thumbs/cupboard2.glb" onclick="openAR(this)">Cupboard 2</div>
+      <div class="thumb" data-model="thumbs/dining_table1.glb" onclick="openAR(this)">Dining Table 1</div>
+      <div class="thumb" data-model="thumbs/dining_table2.glb" onclick="openAR(this)">Dining Table 2</div>
+    </aside>
+  </main>
+
+  <script>
+    const mv = document.getElementById('mv');
+
+    async function openAR(el) {
+      const model = el.dataset.model;
+      mv.src = model;  // change the model
+
+      // Wait until model is loaded
+      mv.addEventListener('load', async () => {
+        try {
+          await mv.enterAR(); // open AR camera
+        } catch (err) {
+          alert("AR not supported on this device/browser.");
+          console.error(err);
+        }
+      }, { once: true });
+    }
+  </script>
+</body>
+</html>
