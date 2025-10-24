@@ -5,15 +5,17 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Furniture AR — Auto Camera</title>
 
+  <!-- Model Viewer -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
   <style>
     body {
-      font-family: system-ui, Arial;
+      font-family: system-ui, Arial, sans-serif;
       margin: 0;
       display: flex;
       flex-direction: column;
       height: 100vh;
+      background: #fafafa;
     }
 
     header {
@@ -81,18 +83,32 @@
       transform: scale(1.05);
     }
 
-    /* Scrollbar style */
     .thumbs::-webkit-scrollbar {
       height: 6px;
     }
-
     .thumbs::-webkit-scrollbar-thumb {
       background: #ccc;
       border-radius: 3px;
     }
-
     .thumbs::-webkit-scrollbar-track {
       background: #f2f2f2;
+    }
+
+    /* Responsive for Desktop */
+    @media (min-width: 768px) {
+      main {
+        flex-direction: row;
+        gap: 20px;
+      }
+      #viewer {
+        flex: 2;
+        min-height: 70vh;
+      }
+      .gallery {
+        flex: 1;
+        overflow-y: auto;
+        padding-right: 10px;
+      }
     }
   </style>
 </head>
@@ -122,91 +138,91 @@
       <!-- Sofas -->
       <div class="category">Sofas</div>
       <div class="thumbs">
-        <div class="thumb" data-model="thumbs/sofa1.glb" onclick="openAR(this)"><img src="thumbs/sofa1.png"></div>
-        <div class="thumb" data-model="thumbs/sofa2.glb" onclick="openAR(this)"><img src="thumbs/sofa2.png"></div>
-        <div class="thumb" data-model="thumbs/sofa3.glb" onclick="openAR(this)"><img src="thumbs/sofa3.png"></div>
-        <div class="thumb" data-model="thumbs/sofa4.glb" onclick="openAR(this)"><img src="thumbs/sofa4.png"></div>
-        <div class="thumb" data-model="thumbs/sofa5.glb" onclick="openAR(this)"><img src="thumbs/sofa5.png"></div>
+        <div class="thumb" data-model="thumbs/sofa1.glb" onclick="openAR(this)"><img src="thumbs/sofa1.jpg"></div>
+        <div class="thumb" data-model="thumbs/sofa2.glb" onclick="openAR(this)"><img src="thumbs/sofa2.jpg"></div>
+        <div class="thumb" data-model="thumbs/sofa3.glb" onclick="openAR(this)"><img src="thumbs/sofa3.jpg"></div>
+        <div class="thumb" data-model="thumbs/sofa4.glb" onclick="openAR(this)"><img src="thumbs/sofa4.jpg"></div>
+        <div class="thumb" data-model="thumbs/sofa5.glb" onclick="openAR(this)"><img src="thumbs/sofa5.jpg"></div>
       </div>
 
       <!-- Cupboards -->
       <div class="category">Cupboards</div>
       <div class="thumbs">
-        <div class="thumb" data-model="thumbs/cupboard1.glb" onclick="openAR(this)"><img src="thumbs/cupboard1.png"></div>
-        <div class="thumb" data-model="thumbs/cupboard2.glb" onclick="openAR(this)"><img src="thumbs/cupboard2.png"></div>
-        <div class="thumb" data-model="thumbs/cupboard3.glb" onclick="openAR(this)"><img src="thumbs/cupboard3.png"></div>
-        <div class="thumb" data-model="thumbs/cupboard4.glb" onclick="openAR(this)"><img src="thumbs/cupboard4.png"></div>
-        <div class="thumb" data-model="thumbs/cupboard5.glb" onclick="openAR(this)"><img src="thumbs/cupboard5.png"></div>
+        <div class="thumb" data-model="thumbs/cupboard1.glb" onclick="openAR(this)"><img src="thumbs/cupboard1.jpg"></div>
+        <div class="thumb" data-model="thumbs/cupboard2.glb" onclick="openAR(this)"><img src="thumbs/cupboard2.jpg"></div>
+        <div class="thumb" data-model="thumbs/cupboard3.glb" onclick="openAR(this)"><img src="thumbs/cupboard3.jpg"></div>
+        <div class="thumb" data-model="thumbs/cupboard4.glb" onclick="openAR(this)"><img src="thumbs/cupboard4.jpg"></div>
+        <div class="thumb" data-model="thumbs/cupboard5.glb" onclick="openAR(this)"><img src="thumbs/cupboard5.jpg"></div>
       </div>
 
       <!-- Dining Tables -->
       <div class="category">Dining Tables</div>
       <div class="thumbs">
-        <div class="thumb" data-model="thumbs/dining_table1.glb" onclick="openAR(this)"><img src="thumbs/dining_table1.png"></div>
-        <div class="thumb" data-model="thumbs/dining_table2.glb" onclick="openAR(this)"><img src="thumbs/dining_table2.png"></div>
-        <div class="thumb" data-model="thumbs/dining_table3.glb" onclick="openAR(this)"><img src="thumbs/dining_table3.png"></div>
-        <div class="thumb" data-model="thumbs/dining_table4.glb" onclick="openAR(this)"><img src="thumbs/dining_table4.png"></div>
-        <div class="thumb" data-model="thumbs/dining_table5.glb" onclick="openAR(this)"><img src="thumbs/dining_table5.png"></div>
+        <div class="thumb" data-model="thumbs/dining_table1.glb" onclick="openAR(this)"><img src="thumbs/dining_table1.jpg"></div>
+        <div class="thumb" data-model="thumbs/dining_table2.glb" onclick="openAR(this)"><img src="thumbs/dining_table2.jpg"></div>
+        <div class="thumb" data-model="thumbs/dining_table3.glb" onclick="openAR(this)"><img src="thumbs/dining_table3.jpg"></div>
+        <div class="thumb" data-model="thumbs/dining_table4.glb" onclick="openAR(this)"><img src="thumbs/dining_table4.jpg"></div>
+        <div class="thumb" data-model="thumbs/dining_table5.glb" onclick="openAR(this)"><img src="thumbs/dining_table5.jpg"></div>
       </div>
 
       <!-- Beds -->
       <div class="category">Beds</div>
       <div class="thumbs">
-        <div class="thumb" data-model="thumbs/bed1.glb" onclick="openAR(this)"><img src="thumbs/bed1.png"></div>
-        <div class="thumb" data-model="thumbs/bed2.glb" onclick="openAR(this)"><img src="thumbs/bed2.png"></div>
-        <div class="thumb" data-model="thumbs/bed3.glb" onclick="openAR(this)"><img src="thumbs/bed3.png"></div>
-        <div class="thumb" data-model="thumbs/bed4.glb" onclick="openAR(this)"><img src="thumbs/bed4.png"></div>
-        <div class="thumb" data-model="thumbs/bed5.glb" onclick="openAR(this)"><img src="thumbs/bed5.png"></div>
+        <div class="thumb" data-model="thumbs/bed1.glb" onclick="openAR(this)"><img src="thumbs/bed1.jpg"></div>
+        <div class="thumb" data-model="thumbs/bed2.glb" onclick="openAR(this)"><img src="thumbs/bed2.jpg"></div>
+        <div class="thumb" data-model="thumbs/bed3.glb" onclick="openAR(this)"><img src="thumbs/bed3.jpg"></div>
+        <div class="thumb" data-model="thumbs/bed4.glb" onclick="openAR(this)"><img src="thumbs/bed4.jpg"></div>
+        <div class="thumb" data-model="thumbs/bed5.glb" onclick="openAR(this)"><img src="thumbs/bed5.jpg"></div>
       </div>
 
       <!-- Chandeliers -->
       <div class="category">Chandeliers</div>
       <div class="thumbs">
-        <div class="thumb" data-model="thumbs/chandelier1.glb" onclick="openAR(this)"><img src="thumbs/chandelier1.png"></div>
-        <div class="thumb" data-model="thumbs/chandelier2.glb" onclick="openAR(this)"><img src="thumbs/chandelier2.png"></div>
-        <div class="thumb" data-model="thumbs/chandelier3.glb" onclick="openAR(this)"><img src="thumbs/chandelier3.png"></div>
-        <div class="thumb" data-model="thumbs/chandelier4.glb" onclick="openAR(this)"><img src="thumbs/chandelier4.png"></div>
-        <div class="thumb" data-model="thumbs/chandelier5.glb" onclick="openAR(this)"><img src="thumbs/chandelier5.png"></div>
+        <div class="thumb" data-model="thumbs/chandelier1.glb" onclick="openAR(this)"><img src="thumbs/chandelier1.jpg"></div>
+        <div class="thumb" data-model="thumbs/chandelier2.glb" onclick="openAR(this)"><img src="thumbs/chandelier2.jpg"></div>
+        <div class="thumb" data-model="thumbs/chandelier3.glb" onclick="openAR(this)"><img src="thumbs/chandelier3.jpg"></div>
+        <div class="thumb" data-model="thumbs/chandelier4.glb" onclick="openAR(this)"><img src="thumbs/chandelier4.jpg"></div>
+        <div class="thumb" data-model="thumbs/chandelier5.glb" onclick="openAR(this)"><img src="thumbs/chandelier5.jpg"></div>
       </div>
 
       <!-- Lamps -->
       <div class="category">Lamps</div>
       <div class="thumbs">
-        <div class="thumb" data-model="thumbs/lamp1.glb" onclick="openAR(this)"><img src="thumbs/lamp1.png"></div>
-        <div class="thumb" data-model="thumbs/lamp2.glb" onclick="openAR(this)"><img src="thumbs/lamp2.png"></div>
-        <div class="thumb" data-model="thumbs/lamp3.glb" onclick="openAR(this)"><img src="thumbs/lamp3.png"></div>
-        <div class="thumb" data-model="thumbs/lamp4.glb" onclick="openAR(this)"><img src="thumbs/lamp4.png"></div>
-        <div class="thumb" data-model="thumbs/lamp5.glb" onclick="openAR(this)"><img src="thumbs/lamp5.png"></div>
+        <div class="thumb" data-model="thumbs/lamp1.glb" onclick="openAR(this)"><img src="thumbs/lamp1.jpg"></div>
+        <div class="thumb" data-model="thumbs/lamp2.glb" onclick="openAR(this)"><img src="thumbs/lamp2.jpg"></div>
+        <div class="thumb" data-model="thumbs/lamp3.glb" onclick="openAR(this)"><img src="thumbs/lamp3.jpg"></div>
+        <div class="thumb" data-model="thumbs/lamp4.glb" onclick="openAR(this)"><img src="thumbs/lamp4.jpg"></div>
+        <div class="thumb" data-model="thumbs/lamp5.glb" onclick="openAR(this)"><img src="thumbs/lamp5.jpg"></div>
       </div>
 
       <!-- Mirrors -->
       <div class="category">Mirrors</div>
       <div class="thumbs">
-        <div class="thumb" data-model="thumbs/mirror1.glb" onclick="openAR(this)"><img src="thumbs/mirror1.png"></div>
-        <div class="thumb" data-model="thumbs/mirror2.glb" onclick="openAR(this)"><img src="thumbs/mirror2.png"></div>
-        <div class="thumb" data-model="thumbs/mirror3.glb" onclick="openAR(this)"><img src="thumbs/mirror3.png"></div>
-        <div class="thumb" data-model="thumbs/mirror4.glb" onclick="openAR(this)"><img src="thumbs/mirror4.png"></div>
-        <div class="thumb" data-model="thumbs/mirror5.glb" onclick="openAR(this)"><img src="thumbs/mirror5.png"></div>
+        <div class="thumb" data-model="thumbs/mirror1.glb" onclick="openAR(this)"><img src="thumbs/mirror1.jpg"></div>
+        <div class="thumb" data-model="thumbs/mirror2.glb" onclick="openAR(this)"><img src="thumbs/mirror2.jpg"></div>
+        <div class="thumb" data-model="thumbs/mirror3.glb" onclick="openAR(this)"><img src="thumbs/mirror3.jpg"></div>
+        <div class="thumb" data-model="thumbs/mirror4.glb" onclick="openAR(this)"><img src="thumbs/mirror4.jpg"></div>
+        <div class="thumb" data-model="thumbs/mirror5.glb" onclick="openAR(this)"><img src="thumbs/mirror5.jpg"></div>
       </div>
 
       <!-- Shelves -->
       <div class="category">Shelves</div>
       <div class="thumbs">
-        <div class="thumb" data-model="thumbs/shelf1.glb" onclick="openAR(this)"><img src="thumbs/shelf1.png"></div>
-        <div class="thumb" data-model="thumbs/shelf2.glb" onclick="openAR(this)"><img src="thumbs/shelf2.png"></div>
-        <div class="thumb" data-model="thumbs/shelf3.glb" onclick="openAR(this)"><img src="thumbs/shelf3.png"></div>
-        <div class="thumb" data-model="thumbs/shelf4.glb" onclick="openAR(this)"><img src="thumbs/shelf4.png"></div>
-        <div class="thumb" data-model="thumbs/shelf5.glb" onclick="openAR(this)"><img src="thumbs/shelf5.png"></div>
+        <div class="thumb" data-model="thumbs/shelf1.glb" onclick="openAR(this)"><img src="thumbs/shelf1.jpg"></div>
+        <div class="thumb" data-model="thumbs/shelf2.glb" onclick="openAR(this)"><img src="thumbs/shelf2.jpg"></div>
+        <div class="thumb" data-model="thumbs/shelf3.glb" onclick="openAR(this)"><img src="thumbs/shelf3.jpg"></div>
+        <div class="thumb" data-model="thumbs/shelf4.glb" onclick="openAR(this)"><img src="thumbs/shelf4.jpg"></div>
+        <div class="thumb" data-model="thumbs/shelf5.glb" onclick="openAR(this)"><img src="thumbs/shelf5.jpg"></div>
       </div>
 
       <!-- Tables -->
       <div class="category">Tables</div>
       <div class="thumbs">
-        <div class="thumb" data-model="thumbs/table1.glb" onclick="openAR(this)"><img src="thumbs/table1.png"></div>
-        <div class="thumb" data-model="thumbs/table2.glb" onclick="openAR(this)"><img src="thumbs/table2.png"></div>
-        <div class="thumb" data-model="thumbs/table3.glb" onclick="openAR(this)"><img src="thumbs/table3.png"></div>
-        <div class="thumb" data-model="thumbs/table4.glb" onclick="openAR(this)"><img src="thumbs/table4.png"></div>
-        <div class="thumb" data-model="thumbs/table5.glb" onclick="openAR(this)"><img src="thumbs/table5.png"></div>
+        <div class="thumb" data-model="thumbs/table1.glb" onclick="openAR(this)"><img src="thumbs/table1.jpg"></div>
+        <div class="thumb" data-model="thumbs/table2.glb" onclick="openAR(this)"><img src="thumbs/table2.jpg"></div>
+        <div class="thumb" data-model="thumbs/table3.glb" onclick="openAR(this)"><img src="thumbs/table3.jpg"></div>
+        <div class="thumb" data-model="thumbs/table4.glb" onclick="openAR(this)"><img src="thumbs/table4.jpg"></div>
+        <div class="thumb" data-model="thumbs/table5.glb" onclick="openAR(this)"><img src="thumbs/table5.jpg"></div>
       </div>
 
     </aside>
