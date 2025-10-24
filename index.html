@@ -55,13 +55,25 @@
       const model = el.dataset.model;
       mv.src = model;  // change the model
 
+      // Check if AR is supported before trying to enter AR mode
+      if (!mv.canActivateAR) {
+        alert("AR is not supported on this device/browser.\nMake sure:\n1. You're using HTTPS\n2. You're using a modern browser (Chrome 79+, iOS 12+)\n3. Your device has AR capabilities");
+        return;
+      }
+
       // Wait until model is loaded
       mv.addEventListener('load', async () => {
         try {
-          await mv.enterAR(); // open AR camera
+          await mv.activateAR();
         } catch (err) {
-          alert("AR not supported on this device/browser.");
-          console.error(err);
+          console.error('Error entering AR:', err);
+          if (err.message.includes('secure context')) {
+            alert("Please access this page via HTTPS to use AR features.");
+          } else if (err.message.includes('permission')) {
+            alert("Camera permission is required for AR. Please allow camera access.");
+          } else {
+            alert("Could not start AR experience. Please make sure your device supports AR and try again.");
+          }
         }
       }, { once: true });
     }
