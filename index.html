@@ -10,11 +10,22 @@
   <style>
     body { font-family: system-ui, Arial; margin:0; display:flex; flex-direction:column; height:100vh; }
     header { padding:12px; background:#f2f2f2; border-bottom:1px solid #e6e6e6; }
-    main { display:flex; flex:1; gap:12px; padding:12px; }
+    
+    main { display:flex; flex-direction:column; flex:1; padding:12px; gap:16px; } /* Always vertical layout */
+    
     #viewer { flex:1; min-height:60vh; background:#111; border-radius:8px; overflow:hidden; }
-    .gallery { width:220px; display:flex; flex-direction:column; gap:8px; }
-    .thumb { cursor:pointer; padding:12px; border:1px solid #ccc; border-radius:8px; text-align:center; background:#fff; transition:background 0.2s; font-size:15px; font-weight:500; }
-    .thumb:hover { background:#f0f0f0; }
+    
+    .gallery { display:flex; flex-direction:column; gap:16px; }
+    .category { font-weight:bold; margin-bottom:8px; font-size:16px; }
+    .thumbs { display:flex; gap:8px; overflow-x:auto; padding-bottom:8px; }
+    .thumb { cursor:pointer; border:1px solid #ccc; border-radius:8px; overflow:hidden; flex: 0 0 auto; width:100px; height:100px; transition: transform 0.2s; }
+    .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+    .thumb:hover { transform: scale(1.05); }
+
+    /* Optional: hide scrollbar for clean look */
+    .thumbs::-webkit-scrollbar { height:6px; }
+    .thumbs::-webkit-scrollbar-thumb { background:#ccc; border-radius:3px; }
+    .thumbs::-webkit-scrollbar-track { background:#f2f2f2; }
   </style>
 </head>
 <body>
@@ -25,7 +36,6 @@
 
   <main>
     <div id="viewer">
-      <!-- Only ONE model-viewer -->
       <model-viewer id="mv"
         src="thumbs/sofa1.glb"
         alt="Furniture"
@@ -39,40 +49,70 @@
     </div>
 
     <aside class="gallery">
-      <div class="thumb" data-model="thumbs/sofa1.glb" onclick="openAR(this)">Sofa 1</div>
-      <div class="thumb" data-model="thumbs/sofa2.glb" onclick="openAR(this)">Sofa 2</div>
-      <div class="thumb" data-model="thumbs/cupboard1.glb" onclick="openAR(this)">Cupboard 1</div>
-      <div class="thumb" data-model="thumbs/cupboard2.glb" onclick="openAR(this)">Cupboard 2</div>
-      <div class="thumb" data-model="thumbs/dining_table1.glb" onclick="openAR(this)">Dining Table 1</div>
-      <div class="thumb" data-model="thumbs/dining_table2.glb" onclick="openAR(this)">Dining Table 2</div>
+      <!-- Sofa Category -->
+      <div class="category">Sofas</div>
+      <div class="thumbs">
+        <div class="thumb" data-model="thumbs/sofa1.glb" onclick="openAR(this)">
+          <img src="thumbs/sofa1.png" alt="Sofa 1">
+        </div>
+        <div class="thumb" data-model="thumbs/sofa2.glb" onclick="openAR(this)">
+          <img src="thumbs/sofa2.png" alt="Sofa 2">
+        </div>
+        <div class="thumb" data-model="thumbs/sofa3.glb" onclick="openAR(this)">
+          <img src="thumbs/sofa3.png" alt="Sofa 3">
+        </div>
+        <div class="thumb" data-model="thumbs/sofa4.glb" onclick="openAR(this)">
+          <img src="thumbs/sofa4.png" alt="Sofa 4">
+        </div>
+      </div>
+
+      <!-- Cupboard Category -->
+      <div class="category">Cupboards</div>
+      <div class="thumbs">
+        <div class="thumb" data-model="thumbs/cupboard1.glb" onclick="openAR(this)">
+          <img src="thumbs/cupboard1.png" alt="Cupboard 1">
+        </div>
+        <div class="thumb" data-model="thumbs/cupboard2.glb" onclick="openAR(this)">
+          <img src="thumbs/cupboard2.png" alt="Cupboard 2">
+        </div>
+      </div>
+
+      <!-- Dining Table Category -->
+      <div class="category">Dining Tables</div>
+      <div class="thumbs">
+        <div class="thumb" data-model="thumbs/dining_table1.glb" onclick="openAR(this)">
+          <img src="thumbs/dining_table1.png" alt="Dining Table 1">
+        </div>
+        <div class="thumb" data-model="thumbs/dining_table2.glb" onclick="openAR(this)">
+          <img src="thumbs/dining_table2.png" alt="Dining Table 2">
+        </div>
+      </div>
     </aside>
   </main>
 
   <script>
     const mv = document.getElementById('mv');
 
-    async function openAR(el) {
+    async function openAR(el) { 
       const model = el.dataset.model;
-      mv.src = model;  // change the model
+      mv.src = model;
 
-      // Check if AR is supported before trying to enter AR mode
       if (!mv.canActivateAR) {
-        alert("AR is not supported on this device/browser.\nMake sure:\n1. You're using HTTPS\n2. You're using a modern browser (Chrome 79+, iOS 12+)\n3. Your device has AR capabilities");
+        alert("AR is not supported on this device/browser.\nMake sure:\n1. You're using HTTPS\n2. Modern browser\n3. Device supports AR");
         return;
       }
 
-      // Wait until model is loaded
       mv.addEventListener('load', async () => {
         try {
           await mv.activateAR();
         } catch (err) {
           console.error('Error entering AR:', err);
           if (err.message.includes('secure context')) {
-            alert("Please access this page via HTTPS to use AR features.");
+            alert("Please access this page via HTTPS.");
           } else if (err.message.includes('permission')) {
-            alert("Camera permission is required for AR. Please allow camera access.");
+            alert("Camera permission is required.");
           } else {
-            alert("Could not start AR experience. Please make sure your device supports AR and try again.");
+            alert("Could not start AR experience. Ensure your device supports AR.");
           }
         }
       }, { once: true });
