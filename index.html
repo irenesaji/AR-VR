@@ -81,6 +81,7 @@
       transform: scale(1.05);
     }
 
+    /* Scrollbar style */
     .thumbs::-webkit-scrollbar {
       height: 6px;
     }
@@ -109,8 +110,8 @@
         alt="Furniture"
         camera-controls
         ar
-        ar-modes="webxr"
-        ar-placement="fixed"
+        ar-modes="webxr scene-viewer quick-look"
+        ar-placement="floor"
         shadow-intensity="1"
         style="width:100%; height:100%;">
       </model-viewer>
@@ -218,13 +219,25 @@
       const model = el.dataset.model;
       mv.src = model;
 
-      if (mv.canActivateAR) {
+      if (!mv.canActivateAR) {
+        alert("AR is not supported on this device/browser.\nMake sure:\n1. You're using HTTPS\n2. Modern browser\n3. Device supports AR");
+        return;
+      }
+
+      mv.addEventListener('load', async () => {
         try {
           await mv.activateAR();
         } catch (err) {
           console.error('Error entering AR:', err);
+          if (err.message.includes('secure context')) {
+            alert("Please access this page via HTTPS.");
+          } else if (err.message.includes('permission')) {
+            alert("Camera permission is required.");
+          } else {
+            alert("Could not start AR experience. Ensure your device supports AR.");
+          }
         }
-      }
+      }, { once: true });
     }
   </script>
 </body>
