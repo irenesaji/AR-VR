@@ -8,95 +8,26 @@
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
   <style>
-    body {
-      font-family: system-ui, Arial;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
+    body { font-family: system-ui, Arial; margin:0; display:flex; flex-direction:column; height:100vh; }
+    header { padding:12px; background:#f2f2f2; border-bottom:1px solid #e6e6e6; }
+    
+    main { display:flex; flex-direction:column; flex:1; padding:12px; gap:16px; } /* Always vertical layout */
+    
+    #viewer { flex:1; min-height:60vh; background:#111; border-radius:8px; overflow:hidden; }
+    
+    .gallery { display:flex; flex-direction:column; gap:16px; }
+    .category { font-weight:bold; margin-bottom:8px; font-size:16px; }
+    .thumbs { display:flex; gap:8px; overflow-x:auto; padding-bottom:8px; }
+    .thumb { cursor:pointer; border:1px solid #ccc; border-radius:8px; overflow:hidden; flex: 0 0 auto; width:100px; height:100px; transition: transform 0.2s; }
+    .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+    .thumb:hover { transform: scale(1.05); }
 
-    header {
-      padding: 12px;
-      background: #f2f2f2;
-      border-bottom: 1px solid #e6e6e6;
-      text-align: center;
-    }
-
-    main {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      padding: 12px;
-      gap: 16px;
-    }
-
-    #viewer {
-      flex: 1;
-      min-height: 60vh;
-      background: #111;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .gallery {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .category {
-      font-weight: bold;
-      margin-bottom: 8px;
-      font-size: 16px;
-    }
-
-    .thumbs {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-    }
-
-    .thumb {
-      cursor: pointer;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      overflow: hidden;
-      flex: 0 0 auto;
-      width: 100px;
-      height: 100px;
-      transition: transform 0.2s;
-      background: #fff;
-    }
-
-    .thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .thumb:hover {
-      transform: scale(1.05);
-    }
-
-    /* Scrollbar style */
-    .thumbs::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .thumbs::-webkit-scrollbar-thumb {
-      background: #ccc;
-      border-radius: 3px;
-    }
-
-    .thumbs::-webkit-scrollbar-track {
-      background: #f2f2f2;
-    }
+    /* Optional: hide scrollbar for clean look */
+    .thumbs::-webkit-scrollbar { height:6px; }
+    .thumbs::-webkit-scrollbar-thumb { background:#ccc; border-radius:3px; }
+    .thumbs::-webkit-scrollbar-track { background:#f2f2f2; }
   </style>
 </head>
-
 <body>
   <header>
     <strong>Furniture AR — Real World Demo</strong>
@@ -118,104 +49,51 @@
     </div>
 
     <aside class="gallery">
-
-      <!-- Sofas -->
+      <!-- Sofa Category -->
       <div class="category">Sofas</div>
       <div class="thumbs">
-        <div class="thumb" data-model="thumbs/sofa1.glb" onclick="openAR(this)"><img src="thumbs/sofa1.png"></div>
-        <div class="thumb" data-model="thumbs/sofa2.glb" onclick="openAR(this)"><img src="thumbs/sofa2.png"></div>
-        <div class="thumb" data-model="thumbs/sofa3.glb" onclick="openAR(this)"><img src="thumbs/sofa3.png"></div>
-        <div class="thumb" data-model="thumbs/sofa4.glb" onclick="openAR(this)"><img src="thumbs/sofa4.png"></div>
-        <div class="thumb" data-model="thumbs/sofa5.glb" onclick="openAR(this)"><img src="thumbs/sofa5.png"></div>
+        <div class="thumb" data-model="thumbs/sofa1.glb" onclick="openAR(this)">
+          <img src="thumbs/sofa1.png" alt="Sofa 1">
+        </div>
+        <div class="thumb" data-model="thumbs/sofa2.glb" onclick="openAR(this)">
+          <img src="thumbs/sofa2.png" alt="Sofa 2">
+        </div>
+        <div class="thumb" data-model="thumbs/sofa3.glb" onclick="openAR(this)">
+          <img src="thumbs/sofa3.png" alt="Sofa 3">
+        </div>
+        <div class="thumb" data-model="thumbs/sofa4.glb" onclick="openAR(this)">
+          <img src="thumbs/sofa4.png" alt="Sofa 4">
+        </div>
       </div>
 
-      <!-- Cupboards -->
+      <!-- Cupboard Category -->
       <div class="category">Cupboards</div>
       <div class="thumbs">
-        <div class="thumb" data-model="thumbs/cupboard1.glb" onclick="openAR(this)"><img src="thumbs/cupboard1.png"></div>
-        <div class="thumb" data-model="thumbs/cupboard2.glb" onclick="openAR(this)"><img src="thumbs/cupboard2.png"></div>
-        <div class="thumb" data-model="thumbs/cupboard3.glb" onclick="openAR(this)"><img src="thumbs/cupboard3.png"></div>
-        <div class="thumb" data-model="thumbs/cupboard4.glb" onclick="openAR(this)"><img src="thumbs/cupboard4.png"></div>
-        <div class="thumb" data-model="thumbs/cupboard5.glb" onclick="openAR(this)"><img src="thumbs/cupboard5.png"></div>
+        <div class="thumb" data-model="thumbs/cupboard1.glb" onclick="openAR(this)">
+          <img src="thumbs/cupboard1.png" alt="Cupboard 1">
+        </div>
+        <div class="thumb" data-model="thumbs/cupboard2.glb" onclick="openAR(this)">
+          <img src="thumbs/cupboard2.png" alt="Cupboard 2">
+        </div>
       </div>
 
-      <!-- Dining Tables -->
+      <!-- Dining Table Category -->
       <div class="category">Dining Tables</div>
       <div class="thumbs">
-        <div class="thumb" data-model="thumbs/dining_table1.glb" onclick="openAR(this)"><img src="thumbs/dining_table1.png"></div>
-        <div class="thumb" data-model="thumbs/dining_table2.glb" onclick="openAR(this)"><img src="thumbs/dining_table2.png"></div>
-        <div class="thumb" data-model="thumbs/dining_table3.glb" onclick="openAR(this)"><img src="thumbs/dining_table3.png"></div>
-        <div class="thumb" data-model="thumbs/dining_table4.glb" onclick="openAR(this)"><img src="thumbs/dining_table4.png"></div>
-        <div class="thumb" data-model="thumbs/dining_table5.glb" onclick="openAR(this)"><img src="thumbs/dining_table5.png"></div>
+        <div class="thumb" data-model="thumbs/dining_table1.glb" onclick="openAR(this)">
+          <img src="thumbs/dining_table1.png" alt="Dining Table 1">
+        </div>
+        <div class="thumb" data-model="thumbs/dining_table2.glb" onclick="openAR(this)">
+          <img src="thumbs/dining_table2.png" alt="Dining Table 2">
+        </div>
       </div>
-
-      <!-- Beds -->
-      <div class="category">Beds</div>
-      <div class="thumbs">
-        <div class="thumb" data-model="thumbs/bed1.glb" onclick="openAR(this)"><img src="thumbs/bed1.png"></div>
-        <div class="thumb" data-model="thumbs/bed2.glb" onclick="openAR(this)"><img src="thumbs/bed2.png"></div>
-        <div class="thumb" data-model="thumbs/bed3.glb" onclick="openAR(this)"><img src="thumbs/bed3.png"></div>
-        <div class="thumb" data-model="thumbs/bed4.glb" onclick="openAR(this)"><img src="thumbs/bed4.png"></div>
-        <div class="thumb" data-model="thumbs/bed5.glb" onclick="openAR(this)"><img src="thumbs/bed5.png"></div>
-      </div>
-
-      <!-- Chandeliers -->
-      <div class="category">Chandeliers</div>
-      <div class="thumbs">
-        <div class="thumb" data-model="thumbs/chandelier1.glb" onclick="openAR(this)"><img src="thumbs/chandelier1.png"></div>
-        <div class="thumb" data-model="thumbs/chandelier2.glb" onclick="openAR(this)"><img src="thumbs/chandelier2.png"></div>
-        <div class="thumb" data-model="thumbs/chandelier3.glb" onclick="openAR(this)"><img src="thumbs/chandelier3.png"></div>
-        <div class="thumb" data-model="thumbs/chandelier4.glb" onclick="openAR(this)"><img src="thumbs/chandelier4.png"></div>
-        <div class="thumb" data-model="thumbs/chandelier5.glb" onclick="openAR(this)"><img src="thumbs/chandelier5.png"></div>
-      </div>
-
-      <!-- Lamps -->
-      <div class="category">Lamps</div>
-      <div class="thumbs">
-        <div class="thumb" data-model="thumbs/lamp1.glb" onclick="openAR(this)"><img src="thumbs/lamp1.png"></div>
-        <div class="thumb" data-model="thumbs/lamp2.glb" onclick="openAR(this)"><img src="thumbs/lamp2.png"></div>
-        <div class="thumb" data-model="thumbs/lamp3.glb" onclick="openAR(this)"><img src="thumbs/lamp3.png"></div>
-        <div class="thumb" data-model="thumbs/lamp4.glb" onclick="openAR(this)"><img src="thumbs/lamp4.png"></div>
-        <div class="thumb" data-model="thumbs/lamp5.glb" onclick="openAR(this)"><img src="thumbs/lamp5.png"></div>
-      </div>
-
-      <!-- Mirrors -->
-      <div class="category">Mirrors</div>
-      <div class="thumbs">
-        <div class="thumb" data-model="thumbs/mirror1.glb" onclick="openAR(this)"><img src="thumbs/mirror1.png"></div>
-        <div class="thumb" data-model="thumbs/mirror2.glb" onclick="openAR(this)"><img src="thumbs/mirror2.png"></div>
-        <div class="thumb" data-model="thumbs/mirror3.glb" onclick="openAR(this)"><img src="thumbs/mirror3.png"></div>
-        <div class="thumb" data-model="thumbs/mirror4.glb" onclick="openAR(this)"><img src="thumbs/mirror4.png"></div>
-        <div class="thumb" data-model="thumbs/mirror5.glb" onclick="openAR(this)"><img src="thumbs/mirror5.png"></div>
-      </div>
-
-      <!-- Shelves -->
-      <div class="category">Shelves</div>
-      <div class="thumbs">
-        <div class="thumb" data-model="thumbs/shelf1.glb" onclick="openAR(this)"><img src="thumbs/shelf1.png"></div>
-        <div class="thumb" data-model="thumbs/shelf2.glb" onclick="openAR(this)"><img src="thumbs/shelf2.png"></div>
-        <div class="thumb" data-model="thumbs/shelf3.glb" onclick="openAR(this)"><img src="thumbs/shelf3.png"></div>
-        <div class="thumb" data-model="thumbs/shelf4.glb" onclick="openAR(this)"><img src="thumbs/shelf4.png"></div>
-        <div class="thumb" data-model="thumbs/shelf5.glb" onclick="openAR(this)"><img src="thumbs/shelf5.png"></div>
-      </div>
-
-      <!-- Tables -->
-      <div class="category">Tables</div>
-      <div class="thumbs">
-        <div class="thumb" data-model="thumbs/table1.glb" onclick="openAR(this)"><img src="thumbs/table1.png"></div>
-        <div class="thumb" data-model="thumbs/table2.glb" onclick="openAR(this)"><img src="thumbs/table2.png"></div>
-        <div class="thumb" data-model="thumbs/table3.glb" onclick="openAR(this)"><img src="thumbs/table3.png"></div>
-        <div class="thumb" data-model="thumbs/table4.glb" onclick="openAR(this)"><img src="thumbs/table4.png"></div>
-        <div class="thumb" data-model="thumbs/table5.glb" onclick="openAR(this)"><img src="thumbs/table5.png"></div>
-      </div>
-
     </aside>
   </main>
 
   <script>
     const mv = document.getElementById('mv');
 
-    async function openAR(el) {
+    async function openAR(el) { 
       const model = el.dataset.model;
       mv.src = model;
 
